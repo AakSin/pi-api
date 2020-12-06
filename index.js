@@ -2,13 +2,17 @@ var express = require("express");
 var app = express();
 var fs = require("fs");
 const { spawn } = require("child_process");
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
 
 const PORT = process.env.PORT || 3000;
 app.get("/", function (req, res) {
   res.send("GET request to homepage");
 });
-app.get("/:code", function (req, res) {
-  fs.writeFile("temp.py", req.params.code, function (err) {
+app.post("/", function (req, res) {
+  fs.writeFile("temp.py", req.body.code, function (err) {
     if (err) throw err;
     console.log("Saved!");
   });
