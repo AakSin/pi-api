@@ -1,3 +1,4 @@
-a=[4,5]
-b=[2,3]
+import sys
+a=int(sys.argv[1])
+b=int(sys.argv[2])
 print(a+b)

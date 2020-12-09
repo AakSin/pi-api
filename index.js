@@ -7,19 +7,24 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.get("/", function (req, res) {
   res.send("GET request to homepage");
 });
 app.post("/", function (req, res) {
+  let variables={
+    first:req.body.first,
+    second:req.body.second
+  }
   fs.writeFile("temp.py", req.body.code, function (err) {
     if (err) throw err;
     console.log("Saved!");
   });
   var dataToSend;
   // spawn new child process to call the python script
-  const python = spawn("python", ["temp.py"]);
+  const python = spawn("python", ["temp.py",variables.first,variables.second]);
   // collect data from script
+  
   python.stdout.on("data", function (data) {
     console.log("Pipe data from python script ...");
     dataToSend = data.toString();
