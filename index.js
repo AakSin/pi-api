@@ -28,7 +28,7 @@ app.post("/", function (req, res) {
   python.stdout.on("data", function (data) {
     console.log("Pipe data from python script ...");
     dataToSend = data.toString();
-    dataToSend=dataToSend.substring(0,dataToSend.length-2)
+    dataToSend=dataToSend.substring(0,dataToSend.length-1)
   });
   // in close event we are sure that stream from child process is closed
   python.on("close", (code) => {
