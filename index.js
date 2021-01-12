@@ -1,8 +1,11 @@
-var express = require("express");
-var app = express();
-var fs = require("fs");
+const express = require("express");
+const app = express();
+const fs = require("fs");
 const { spawn } = require("child_process");
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+app.use(cors())
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
